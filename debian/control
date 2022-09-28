@@ -1,0 +1,30 @@
+Source: enscript
+Section: text
+Priority: optional
+Maintainer: Tim Retout <diocles@debian.org>
+Build-Depends: debhelper (>= 8.9.4),
+ dpkg-dev (>= 1.16.1),
+ libpaper-dev,
+ autotools-dev,
+ autoconf,
+ automake1.11,
+ autopoint
+Build-Conflicts: autoconf2.13, automake1.4
+Standards-Version: 3.9.2
+Vcs-Git: git://git.debian.org/git/collab-maint/enscript.git
+Vcs-Browser: http://git.debian.org/?p=collab-maint/enscript.git
+Homepage: http://www.gnu.org/software/enscript/
+
+Package: enscript
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}, ${perl:Depends}
+Replaces: octave3.0
+Suggests: gv | postscript-viewer, lpr
+Description: converts text to Postscript, HTML or RTF with syntax highlighting
+ GNU Enscript takes ASCII files (often source code) and converts them
+ to PostScript, HTML or RTF.  It can store generated output to a file
+ or send it directly to the printer.
+ .
+ It is often used for its syntax highlighting, as it comes with rules
+ for a wide range of programming languages.  New rules can be added
+ using an awk-like stateful scripting language.

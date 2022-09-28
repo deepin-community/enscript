@@ -1,0 +1,19 @@
+#!/usr/bin/make -f
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+%:
+	dh $@
+
+override_dh_auto_clean:
+	dh_auto_clean
+	find -name Makefile.in -exec rm {} \;
+
+override_dh_auto_configure:
+	AUTOMAKE=automake-1.11 ACLOCAL=aclocal-1.11 autoreconf -fis
+	dh_auto_configure
+
+override_dh_auto_install:
+	dh_auto_install
+	rm -f debian/enscript/usr/share/info/dir
+

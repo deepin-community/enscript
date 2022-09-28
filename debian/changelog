@@ -1,0 +1,455 @@
+enscript (1.6.5.90-3) unstable; urgency=medium
+
+  * Force use of aclocal 1.11 to fix FTBFS. (Closes: #822407)
+    Thanks to Andrea Bolognani.
+
+ -- Tim Retout <diocles@debian.org>  Mon, 06 Jun 2016 23:27:51 +0100
+
+enscript (1.6.5.90-2) unstable; urgency=low
+
+  * debian/rules: Enable all hardening features.
+  * debian/control:
+    + Build-Depend on debhelper (>= 8.9.4) for hardening.
+    + Build-Depend on dpkg-dev (>= 1.16.1) for hardening.
+  * debian/compat: Bump to level 9.
+
+ -- Tim Retout <diocles@debian.org>  Sat, 31 Dec 2011 23:23:55 +0000
+
+enscript (1.6.5.90-1) unstable; urgency=low
+
+  * New upstream version.
+    + Remove patches applied upstream:
+      - 393791-sliceprint
+      - getopt_long hunk from 03_misc
+      - mail.st hunk from 04_highlighting
+    + Refresh all patches.
+  * debian/control:
+    + Bump Standards-Version to 3.9.2. (No changes.)
+    + Build-Depend on debhelper (>= 8)
+    + Add ${perl:Depends} to Depends field.
+  * debian/compat: Bump to 8.
+
+ -- Tim Retout <diocles@debian.org>  Sun, 10 Jul 2011 18:21:02 +0100
+
+enscript (1.6.5.2-1) unstable; urgency=low
+
+  * New upstream version.
+    + Fixes segmentation fault with long lines. (Closes: #580981)
+  * debian/control:
+    + Add Replaces for octave3.0 from lenny which contains an enscript
+    highlighting script. Ignoring octave2.9 from etch. (Closes: #583561)
+    + Remove ancient Replaces/Conflicts for genscript.
+  * debian/patches/344750-no-gecos: Refresh patch.
+
+ -- Tim Retout <diocles@debian.org>  Thu, 03 Jun 2010 00:33:51 +0100
+
+enscript (1.6.5.1-1) unstable; urgency=low
+
+  * New upstream version.
+    + Remove patch applied upstream: manpage-spelling-errors
+  * debian/control:
+    + Build-Depend on autopoint, and remove gettext and cvs.
+      (Closes: #572467)
+    + Remove quilt from Build-Depends.
+    + Bump Standards-Version to 3.8.4 (no changes needed).
+
+ -- Tim Retout <diocles@debian.org>  Sat, 06 Mar 2010 20:50:17 +0000
+
+enscript (1.6.5-1) unstable; urgency=low
+
+  * New upstream version.
+    + Remove patches applied upstream.
+    + Remove all out of date i18n patches.
+    + Refresh other patches.
+  * debian/watch: Update URL.
+  * debian/control:
+    + Update maintainer email address.
+    + Bump debhelper Build-Depends to (>= 7.0.50~) and remove quilt.
+    + Add various autotools packages and cvs to Build-Depends and
+      Build-Conflicts.
+  * Switch to source format 3.0 (quilt).
+  * Revise build system.
+    + Bump debhelper compat level to 7.
+    + Use a minimal dh rules file.
+    + Create debian/clean, debian/enscript.{manpages,info,links}.
+    + Move debian/docs to debian/enscript.docs.
+  * debian/patches/manpage-spelling-errors: New patch.
+  * debian/copyright: Update license, upstream URL and maintainer.
+
+ -- Tim Retout <diocles@debian.org>  Wed, 27 Jan 2010 19:57:14 +0000
+
+enscript (1.6.4-14) unstable; urgency=low
+
+  * debian/control:
+    + Add Vcs-* and Homepage fields.
+    + Update Standards-Version to 3.8.3.
+    + Remove unknown 'Tag' field.
+    + Revise short and long descriptions.
+    + Add ${misc:Depends} to Depends.
+    + Remove 'flex' from Build-Depends. (Closes: #464142)
+  * debian/copyright: Reference GPL-2 license file rather than symlink.
+  * Add new highlighting rules for GNU Octave, and use in preference to Matlab
+    for files with a `.m' extension. Thanks to Rafael Laboissiere for the
+    patch. (Closes: #457244)
+  * Move changes from Debian diff.gz into debian/patches files beginning
+    with '00'.  Drop generated changes to states/lex.c.
+  * debian/patches/escape-states-man-page-backslashes: Fix some escaping
+    in the regexes in the states manpage.
+  * debian/patches/fix-man-page-hyphens: New patch.
+  * debian/README.source: New file to describe quilt usage.
+  * debian/patches/08_flex: Drop, as seems to be unnecessary with flex 2.5.35.
+  * Fix building twice in a row:
+    + debian/rules: No longer remove po/enscript.pot during clean.
+    + debian/patches/update-enscript.pot: New patch.
+    + Refresh 13_de_correction and 276219-grammar-fix patches.
+  * Add descriptions to patches which were missing them.
+  * debian/enscript.doc-base.enscript, debian/enscript.doc-base-enscript-faq:
+    New doc-base files to register documentation.
+
+ -- Tim Retout <tim@retout.co.uk>  Sun, 01 Nov 2009 23:47:15 +0000
+
+enscript (1.6.4-13) unstable; urgency=high
+
+  * debian/patches/506261-buffer-overflows: New patch by Werner Fink to fix
+    buffer overflows: CVE-2008-3863, CVE-2008-4306. (Closes: #506261)
+  * Urgency set to "high" for RC security bugfix.
+
+ -- Tim Retout <tim@retout.co.uk>  Wed, 19 Nov 2008 22:45:35 +0000
+
+enscript (1.6.4-12) unstable; urgency=low
+
+  * New maintainer. (Closes: #413482)
+  * Bump debhelper compatibility level to 5.
+  * Don't ignore "make distclean" errors.
+  * Support highlighting multi-line preprocessor statements. (Closes: #264097)
+  * Fix highlighting of .idl files containing preprocessor statements.
+    (Closes: #443182)
+  * Fix highlighting of quotes in shell scripts. (Closes: #373649)
+  * Fix highlighting of JavaScript regexes. (Closes: #331298)
+  * Fix double free when using --toc option. (Closes: #397537)
+
+ -- Tim Retout <tim@retout.co.uk>  Sat, 27 Oct 2007 00:16:37 +0100
+
+enscript (1.6.4-11) unstable; urgency=low
+
+  * sliceprint: fix enscript call (program was completely broken), and
+    complete manpage (Closes: #393791).
+
+ -- Christoph Berg <myon@debian.org>  Wed, 25 Oct 2006 02:21:08 +0200
+
+enscript (1.6.4-10) unstable; urgency=low
+
+  * New maintainer (Closes: #349321).
+  * Add debtags to debian/control.
+  * Use quilt for patches.
+  * Use make distclean, maintainer-clean-am wiped out too much.
+  * Hilight wrapped function lists in changelog mode correctly (thanks to
+    Daniel Leidert for the patch, Closes: #339938).
+  * Include ruby hilighting (Closes: #147116).
+  * Never include gecos in ps output (Closes: #344750).
+  * Fix some grammar (Closes: #276219).
+  * Translate fuzzy strings in de.po.
+
+ -- Christoph Berg <myon@debian.org>  Sun,  8 Oct 2006 00:14:56 +0200
+
+enscript (1.6.4-9) unstable; urgency=low
+
+  * QA upload.
+  * Automatically update config.sub and config.guess from autotools-dev.
+    Closes: #342408.
+  * po/de.po: Apply correction from Christoph Berg.  Closes: #315114.
+  * debian/watch: Update; thanks to Bart Martens.  Closes: #354359.
+  * Conforms to Standards version 3.6.2.
+
+ -- Matej Vela <vela@debian.org>  Tue,  7 Mar 2006 07:10:49 +0100
+
+enscript (1.6.4-8) unstable; urgency=low
+
+  * Orphaned.
+
+ -- Michael Fedrowitz <michaelf@debian.org>  Sun, 22 Jan 2006 11:46:18 +0100
+
+enscript (1.6.4-7) unstable; urgency=low
+
+  * Fixed building with gcc4. Thanks to Andreas Jochens for the patch.
+    (Closes: #292990)
+  * strdup return values from libpaper to prevent double frees.
+    (Closes: #289724, #294342)
+  * Suggest lpr. (Closes: #287296)
+
+ -- Michael Fedrowitz <michaelf@debian.org>  Sun, 13 Feb 2005 20:58:37 +0100
+
+enscript (1.6.4-6) unstable; urgency=high
+
+  * [SECURITY] Applied the following patches from the Debian Security Team:
+    - [CAN-2004-1184] Corrected handling of user supplied input (filename,
+      title) when executing shell commands.
+    - [CAN-2004-1185] Commented out code that will permit EPS files to be
+      provided as arbitrary programs to be executed.
+    - [CAN-2004-1186] Fixed buffer overflows.
+
+ -- Michael Fedrowitz <michaelf@debian.org>  Thu, 20 Jan 2005 20:00:21 +0100
+
+enscript (1.6.4-5) unstable; urgency=low
+
+  * Additional highlighting rules submitted by Brent Fulgham. Thanks a lot!
+    (Closes: #279037)
+  * Updated copyright file for the above.
+  * Removed ghostview from suggests.
+
+ -- Michael Fedrowitz <michaelf@debian.org>  Sun, 28 Nov 2004 19:05:30 +0100
+
+enscript (1.6.4-4) unstable; urgency=low
+
+  * Added mkafmmap manpage by Lucas Wall. Thanks a lot! (Closes: #248390)
+  * Added "last" to tcl keywords. (Closes: #225979)
+  * Removed useless menu file.
+
+ -- Michael Fedrowitz <michaelf@debian.org>  Mon, 31 May 2004 14:20:42 +0200
+
+enscript (1.6.4-3) unstable; urgency=low
+
+  * Perl highlighting fixes. (Closes: #221513, #222123)
+  * More manpage typos. (Closes: #222075)
+
+ -- Michael Fedrowitz <michaelf@debian.org>  Sun,  7 Dec 2003 12:05:37 +0100
+
+enscript (1.6.4-2) unstable; urgency=low
+
+  * Comment out install-info calls in docs/Makefile.in to avoid shipping
+    /usr/share/info/dir.gz as a quick fix until I manage to get things to
+    work with the latest automake. (Closes: #220956)
+
+ -- Michael Fedrowitz <michaelf@debian.org>  Sun, 16 Nov 2003 14:04:40 +0100
+
+enscript (1.6.4-1) unstable; urgency=low
+
+  * New upstream release.
+  * Standards-Version 3.6.1 (no changes required).
+  * Added Eiffel syntax highlighting by Julien LEMOINE. (Closes: #218851)
+  * Updated year in copyright file.
+
+ -- Michael Fedrowitz <michaelf@debian.org>  Sat,  8 Nov 2003 21:56:26 +0100
+
+enscript (1.6.3-5) unstable; urgency=low
+
+  * Standards-Version 3.5.10 (no changes required).
+  * Change AppendCtrlD to allow appending ^D without trailing newline.
+    (Closes: #88893)
+  * Fix another mistake in the manpage. (Closes: #197980)
+
+ -- Michael Fedrowitz <michaelf@debian.org>  Sun,  6 Jul 2003 17:49:04 +0200
+
+enscript (1.6.3-4) unstable; urgency=low
+
+  * Standards-Version 3.5.9 (no changes required).
+  * Convert to dpatch.
+  * Fix to build with flex 2.5.31.
+
+ -- Michael Fedrowitz <michaelf@debian.org>  Thu,  1 May 2003 18:15:23 +0200
+
+enscript (1.6.3-3) unstable; urgency=low
+
+  * Update copyright file.
+  * Various corrections to the manpages. (Closes: #61505, #177565)
+  * New media definitions "borrowed" from CUPS. (Closes: #74332)
+  * Make media names case insensitive. (Closes: #177692)
+  * Remove ghostscript from suggests and prefer gv to ghostview.
+  * Remove generated file states/over when cleaning.
+
+ -- Michael Fedrowitz <michaelf@debian.org>  Fri, 24 Jan 2003 16:42:19 +0100
+
+enscript (1.6.3-2) unstable; urgency=low
+
+  * New maintainer. (Closes: #176931)
+  * Standards-Version 3.5.8:
+    - Support DEB_BUILD_OPTIONS.
+    - Build depend on debhelper (>= 4.1.0) to get rid of /usr/doc link.
+  * Rewrote debian/rules using debhelper v4.
+  * Apply a patch from Chris Halls to make -w work.
+    (Closes: #141642, #149979, #160633)
+  * Apply a patch from John West to fix a typo in perl.st.
+    (Closes: #151055, #169835)
+  * Apply a patch from Andras Bali to improve changelog.st. (Closes: #140528)
+  * Apply a patch from Thomas Roessler to improve mail.st. (Closes: #147648)
+  * Acknowledge NMUs. (Closes: #48043, #55388, #58990, #76310, #79684,
+    #113362, #122566, #135076, #135997, #136001, #140066, #140542)
+
+ -- Michael Fedrowitz <michaelf@debian.org>  Fri, 17 Jan 2003 14:59:32 +0100
+
+enscript (1.6.3-1.1) unstable; urgency=low
+
+  * Non maintainer upload
+  * Add build dep to flex (Closes: #140066)
+
+ -- Benjamin Drieu <benj@debian.org>  Wed,  3 Apr 2002 16:12:21 +0200
+
+enscript (1.6.3-1) unstable; urgency=low
+
+  * NMU (closes: #136001)
+  * New upstream
+  * Use I18N date now (closes: #135076)
+  * Add LC_CTYPE to I18N code (closes: #76310, #79684)
+  * Use "$@" arguments and pager in over (closes: #48043)
+  * Added build-dependencies (closes: #122566)
+  * Added man page for over (closes: #55388)
+  * Fixed type in man page for enscript (closes: #113362)
+  * Install info dir entry (closes: #135997)
+  * Menu entry and man page position match (closes: #58990)
+  * Updated Standards-Version to 3.5.2
+
+ -- Michael Piefel <piefel@debian.org>  Tue, 19 Mar 2002 11:22:37 +0100
+
+enscript (1.6.2-4) unstable; urgency=low
+
+  * Lintian fixes for usr/doc and usr/share
+
+ -- Hartmut Koptein <koptein@debian.org>  Thu, 21 Oct 1999 13:13:23 +0200
+
+
+enscript (1.6.2-3) unstable; urgency=low
+
+  * Updated Standards-Version to 3.0.1.1
+
+ -- Hartmut Koptein <koptein@debian.org>  Tue,  7 Sep 1999 00:50:00 +0200
+
+
+enscript (1.6.2-2) unstable; urgency=low
+
+  * arrgs; the new i386 autobuilder is great
+  * fixed -$(MAKE), reported by James; Fixes: Bug#38719
+
+ -- Hartmut Koptein <koptein@debian.org>  Tue,  1 Jun 1999 20:20:53 +0200
+
+
+enscript (1.6.2-1) unstable; urgency=low
+
+  * New upstream version
+  * changes for the menu system
+
+ -- Hartmut Koptein <koptein@debian.org>  Thu, 29 Apr 1999 21:34:24 +0200
+
+
+enscript (1.6.1-1) unstable; urgency=low
+
+  * New upstream version 1.6.1
+  * This version fix the -U2 output; Fixes: Bug#24278
+
+ -- Hartmut Koptein <koptein@et-inf.fho-emden.de>  Tue,  7 Jul 1998 20:44:46 +0200
+
+
+enscript (1.6.0-1) unstable; urgency=low
+  
+  * New upstream version 1.6.0
+
+ -- Hartmut Koptein <koptein@et-inf.fho-emden.de>  Thu,  2 Jul 1998 13:10:29 +0200
+
+
+enscript (1.5.5-1) unstable; urgency=low
+
+  * Upgraded to new upstream version 1.5.5
+  * Little grammatic correction
+  * Converted debian/rules to debhelper
+  * Removed double media entries for new libpaper
+
+ -- Hartmut Koptein <koptein@et-inf.fho-emden.de>  Tue, 19 May 1998 22:25:15 +0200
+
+
+enscript (1.5.0-8) frozen unstable; urgency=low
+
+  * added postrm script for update-menus
+  * added double media entries in enscript.cfg (for papersize)
+
+ -- Hartmut Koptein <koptein@et-inf.fho-emden.de>  Mon, 30 Mar 1998 02:30:46 +0200 
+
+
+enscript (1.5.0-7) frozen unstable; urgency=low
+
+  * added menu file (man, html)
+  * include the orig file
+
+ -- Hartmut Koptein <koptein@et-inf.fho-emden.de>  Tue, 24 Mar 1998 05:26:47 +0100 
+
+
+enscript (1.5.0-6) frozen; urgency=low
+
+  * must go to frozen
+
+ -- Hartmut Koptein <koptein@et-inf.fho-emden.de>  Tue, 17 Mar 1998 04:13:40 +0100 
+
+
+enscript (1.5.0-5) unstable; urgency=low
+
+  * uncommented default media in enscript.cfg
+  * Standards Version: 2.4.0.0
+  * removed ansi2krn manpage; fixes: Bug#17832, Bug#17941, Bug#19586
+  * fixes from lintin report
+  * arch compile error; must be fixed by the arch maintainer; fixes: Bug#19302
+
+ -- Hartmut Koptein <koptein@et-inf.fho-emden.de>  Tue, 17 Mar 1998 04:09:35 +0100 
+
+
+enscript (1.5.0-4) unstable; urgency=low
+
+  * use libpaperg insted of libpaper; Fixes: Bug#15274, Bug#15373 
+  * border (first) line should be fixed with previous version; Fixes: Bug#5387
+  * added files in /usr/doc/enscript; Fixes: Bug#14221
+
+ -- Hartmut Koptein <koptein@et-inf.fho-emden.de>  Thu, 27 Nov 1997 22:47:36 +0100
+
+
+enscript (1.5.0-3) unstable; urgency=low
+
+  * use LIBPAPER (Bug#3169, Bug#13564)
+  * change path definitions in man pages (Bug#14223, Bug#14226)
+
+ -- Hartmut Koptein <koptein@et-inf.fho-emden.de>  Mon, 17 Nov 1997 20:34:46 +0100
+
+
+enscript (1.5.0-2) unstable; urgency=low
+
+  * Build for libc6
+  * Maintainer change
+
+ -- Hartmut Koptein <koptein@et-inf.fho-emden.de>  Mon, 18 Aug 1997 01:42:58 +0200
+
+
+enscript (1.5.0-1) unstable; urgency=low
+
+  * new upstream version
+
+ -- Sven Rudolph <sr1@inf.tu-dresden.de>  Thu, 6 Mar 1997 16:59:53 +0100
+
+
+enscript (1.4.0-2) unstable; urgency=low
+
+  * debian/conffiles: fixed permission (Bug#4662)
+  * converted to new source package format
+
+ -- Sven Rudolph <sr1@inf.tu-dresden.de>  Thu, 3 Oct 1996 23:34:43 +0200
+
+
+Sun Jul 28 23:28:02 1996  Sven Rudolph  <sr1@inf.tu-dresden.de>
+
+	* updated to upstream version 1.4.0
+	* debian.control: added Priority: optional
+                                Conflicts: genscript
+                                Replaces: genscript
+	* debian.rules: added multi-architecture support
+
+
+Mon Apr 29 18:02:03 1996  Sven Rudolph  <sr1@inf.tu-dresden.de>
+
+	* upgraded to upstream version 1.3.2
+
+
+Thu Nov 23 23:27:13 1995  Sven Rudolph  <sr1@inf.tu-dresden.de>
+
+	* 1.2.20-2 released
+	* rebuilt for elf
+
+
+Wed Nov 15 01:20:24 1995  Sven Rudolph  <sr1@inf.tu-dresden.de>
+
+	* 1.2.20-1 released
+	* created new Debian GNU/Linux package maintenance system files

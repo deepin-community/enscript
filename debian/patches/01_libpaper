@@ -1,0 +1,69 @@
+## 01_libpaper.dpatch by Michael Fedrowitz <michaelf@debian.org>
+## DP: libpaper support
+--- a/docs/enscript.man
++++ b/docs/enscript.man
+@@ -294,7 +294,7 @@
+ .TP 8
+ .B \-M \f2name\f3, \-\-media=\f2name\f3
+ Select an output media \f2name\f1.  \f3Enscript\f1's default output
+-media is \f3@media@\f1.
++media is determined from libpaper and falls back to \f3@media@\f1.
+ .TP 8
+ .B \-n \f2num\f3, \-\-copies=\f2num\f3
+ Print \f2num\f1 copies of each page.
+--- a/lib/enscript.cfg.in
++++ b/lib/enscript.cfg.in
+@@ -46,7 +46,7 @@
+ DefaultFancyHeader: enscript
+ 
+ # Default output media.
+-DefaultMedia: @media@
++# DefaultMedia: @media@
+ 
+ # Where output goes as a default: `printer' or `stdout'
+ DefaultOutputMethod: printer
+--- a/src/main.c
++++ b/src/main.c
+@@ -22,6 +22,8 @@
+  * along with Enscript.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
++#include <paper.h>
++
+ #include "gsint.h"
+ #include "getopt.h"
+ 
+@@ -1037,6 +1039,13 @@
+   statusdict = strhash_init ();
+   user_strings = strhash_init ();
+ 
++  /*
++   * Set media (libpaper) before reading config-files
++   */
++  media_name = (char *) systempapername();
++  if (media_name == NULL)
++    media_name = (char *) defaultpapername();
++  media_name = xstrdup (media_name);
+ 
+   /*
+    * Read configuration files.
+@@ -1219,7 +1228,7 @@
+ 
+   /* Output media. */
+   for (mentry = media_names; mentry; mentry = mentry->next)
+-    if (strcmp (media_name, mentry->name) == 0)
++    if (strcasecmp (media_name, mentry->name) == 0)
+       {
+ 	media = mentry;
+ 	break;
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -34,7 +34,7 @@
+ 
+ mkafmmap_SOURCES = mkafmmap.c
+ 
+-LDADD = ../afmlib/libafm.a @LIBINTL@ ../compat/libcompat.a -lm
++LDADD = ../afmlib/libafm.a @LIBINTL@ ../compat/libcompat.a -lpaper -lm
+ enscript_DEPENDENCIES = ../afmlib/libafm.a ../compat/libcompat.a
+ mkafmmap_DEPENDENCIES = ../afmlib/libafm.a ../compat/libcompat.a
+ 

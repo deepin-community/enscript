@@ -1,0 +1,17 @@
+Description: Never include gecos in output.
+Author: Christoph Berg <myon@debian.org>
+Bug-Debian: http://bugs.debian.org/344750
+
+Index: enscript/src/psgen.c
+===================================================================
+--- enscript.orig/src/psgen.c
++++ enscript/src/psgen.c
+@@ -301,7 +301,7 @@
+   OUTPUT ((cofp, "%%%%BoundingBox: %d %d %d %d\n", media->llx, media->lly,
+ 	   media->urx, media->ury));
+   OUTPUT ((cofp, "%%%%Title: %s\n", title));
+-  OUTPUT ((cofp, "%%%%For: %s\n", passwd->pw_gecos));
++  /* OUTPUT ((cofp, "%%%%For: %s\n", passwd->pw_gecos)); */
+   OUTPUT ((cofp, "%%%%Creator: %s\n", PACKAGE_STRING));
+   OUTPUT ((cofp, "%%%%CreationDate: %s\n", date_string));
+   OUTPUT ((cofp, "%%%%Orientation: %s\n",

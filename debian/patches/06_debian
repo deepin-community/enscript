@@ -1,0 +1,10 @@
+## 06_debian.dpatch by Michael Fedrowitz <michaelf@debian.org>
+## DP: debian specific changes
+--- a/states/over.in
++++ b/states/over.in
+@@ -2,4 +2,4 @@
+ 
+ librarydir=@LIBRARYDIR@
+ 
+-enscript -E -p- --quiet --language=overstrike "$@" 2>&1 | less
++enscript -E -p- --quiet --language=overstrike "$@" 2>&1 | sensible-pager

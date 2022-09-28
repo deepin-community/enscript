@@ -1,0 +1,8 @@
+docs/*.html
+*.txt
+AUTHORS
+NEWS
+README
+README.ESCAPES
+THANKS
+TODO

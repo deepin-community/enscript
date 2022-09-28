@@ -1,0 +1,35 @@
+Description: Highlight wrapped function lists in ChangeLog files.
+Author: Daniel Leidert <daniel.leidert.spam@gmx.net>
+Bug-Debian: http://bugs.debian.org/339938
+
+Index: enscript/states/hl/changelog.st
+===================================================================
+--- enscript.orig/states/hl/changelog.st	2006-10-07 22:08:46.964125208 +0200
++++ enscript/states/hl/changelog.st	2006-09-22 18:15:34.000000000 +0200
+@@ -26,7 +26,7 @@ state changelog extends HighlightEntry
+   }
+ 
+   /* File descriptions with function names. */
+-  /(^\t\* )([^\(]+)(\()([^\)]+)(\):)/ {
++  /(^\t\* )([^\(\n]+)(\()([^\)\n]+)(\)[:\n])/ {
+     language_print ($1);
+ 
+     function_name_face (true);
+@@ -43,7 +43,7 @@ state changelog extends HighlightEntry
+   }
+ 
+   /* File descriptions without function names. */
+-  /(^\t\* )([^:]+)(:)/ {
++  /(^\t\* )([^:\n\(]+)([:\n])/ {
+     language_print ($1);
+ 
+     function_name_face (true);
+@@ -54,7 +54,7 @@ state changelog extends HighlightEntry
+   }
+ 
+   /* Function name descriptions without file names. */
+-  /(^\t\()([^\)]+)(\):)/ {
++  /(^\t\()([^\)\n]+)(\)[:\n])/ {
+     language_print ($1);
+ 
+     keyword_face (true);

@@ -1,0 +1,49 @@
+## 03_misc.dpatch by Michael Fedrowitz <michaelf@debian.org>
+## DP: miscellaneous bug fixes
+--- a/compat/regex.c
++++ b/compat/regex.c
+@@ -2400,11 +2400,13 @@
+             case ')':
+               if (syntax & RE_NO_BK_PARENS) goto normal_backslash;
+ 
+-              if (COMPILE_STACK_EMPTY)
+-                if (syntax & RE_UNMATCHED_RIGHT_PAREN_ORD)
++              if (COMPILE_STACK_EMPTY) {
++                if (syntax & RE_UNMATCHED_RIGHT_PAREN_ORD) {
+                   goto normal_backslash;
+-                else
++		} else {
+                   FREE_STACK_RETURN (REG_ERPAREN);
++		}  
++	      }	
+ 
+             handle_close:
+               if (fixup_alt_jump)
+@@ -2420,11 +2422,13 @@
+                 }
+ 
+               /* See similar code for backslashed left paren above.  */
+-              if (COMPILE_STACK_EMPTY)
+-                if (syntax & RE_UNMATCHED_RIGHT_PAREN_ORD)
++              if (COMPILE_STACK_EMPTY) {
++                if (syntax & RE_UNMATCHED_RIGHT_PAREN_ORD) {
+                   goto normal_char;
+-                else
++		} else {
+                   FREE_STACK_RETURN (REG_ERPAREN);
++		}
++	      }	
+ 
+               /* Since we just checked for an empty stack above, this
+                  ``can't happen''.  */
+--- a/src/psgen.c
++++ b/src/psgen.c
+@@ -2562,7 +2562,7 @@
+ read_float (InputStream *is, int units, int horizontal)
+ {
+   char buf[256];
+-  int i, ch;
++  int i, ch = 0;
+   double val;
+ 
+   for (i = 0; (i < sizeof (buf) - 1

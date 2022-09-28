@@ -1,0 +1,39 @@
+## 09_appendctrld.dpatch by Michael Fedrowitz <michaelf@debian.org>
+## DP: Change AppendCtrlD to allow appending ^D without trailing newline.
+--- a/docs/enscript.man
++++ b/docs/enscript.man
+@@ -665,9 +665,11 @@
+ .B AFMPath: \f2path\f3
+ Specifies the search path for the \f2AFM\f1 files.
+ .TP 8
+-.B AppendCtrlD: \f2bool\f3
++.B AppendCtrlD: \f2int\f3
+ Specify if the Control-D (^D) character should be appended to the end
+-of the output.  The default value is false (0).
++of the output.  A value of 1 will append ^D followed by a newline, a
++value of 2 will omit the trailing newline.  The default value is 0 for
++no ^D.
+ .TP 8
+ .B Clean7Bit: \f2bool\f3
+ Specify how characters greater than 127 are printed.  The valuee true
+--- a/src/main.c
++++ b/src/main.c
+@@ -1720,11 +1720,15 @@
+       dump_ps_trailer ();
+ 
+       /*
+-       * Append ^D to the end of the output?  Note! It must be ^D followed
++       * Append ^D to the end of the output?  Optionally followed
+        * by a newline.
+        */
+-      if (ofp != NULL && append_ctrl_D)
+-	fprintf (ofp, "\004\n");
++      if (ofp != NULL && append_ctrl_D > 0)
++	{
++	  fprintf (ofp, "\004");
++	  if (append_ctrl_D == 1)
++	    fprintf (ofp, "\n");
++	}
+     }
+ 
+   /* Close output file. */

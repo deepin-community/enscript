@@ -1,0 +1,35 @@
+## 07_media.dpatch by Michael Fedrowitz <michaelf@debian.org>
+## DP: new media definitions taken from CUPS
+--- a/lib/enscript.cfg.in
++++ b/lib/enscript.cfg.in
+@@ -84,15 +84,23 @@
+ 
+ # Media definitions:
+ #	name		width	height	llx	lly	urx	ury
+-Media:	A3		842	1190	24	24	818	1166
+-Media:	A4		595	842	24	24	571	818
+-Media:	A5		420	595	24	24	396	571
+-Media:	Legal		612	1008	24	24	588	984
+-Media:  Letter		612	792	38	24	574	768
++Media:	Letter		612	792	18	36	594	756
++Media:	Legal		612	1008	18	36	594	972
++Media:	Executive	522	756	18	36	504	684
++Media:	Tabloid		792	1224	18	36	774	1188
++Media:	A3		842	1191	18	36	824	1155
++Media:	A4		595	842	18	36	577	806
++Media:	A5		421	595	18	36	403	559
++Media:	B5		516	729	18	36	498	693
++Media:	EnvISOB5	499	709	18	36	463	673
++Media:	Env10		297	684	18	36	279	648
++Media:	EnvC5		459	649	18	36	441	613
++Media:	EnvDL		312	624	18	36	294	588
++Media:	EnvMonarch	279	540	18	36	261	504
+ 
+ # HP DeskJet media (DeskJet can't print on the bottom 1/2" of the paper).
+-Media:	A4dj		595	842	24	50	571	818
+-Media:  Letterdj        612     792     24      40      588     768
++Media:	A4dj		595	842	18	50	577	806
++Media:  Letterdj        612     792     18      40      594     756
+ 
+ # Spooler option to suppress the job header.
+ NoJobHeaderSwitch: -h
